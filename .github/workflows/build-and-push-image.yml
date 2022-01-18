@@ -1,19 +1,22 @@
 name: build-image
 on: [push]
-jobs:
+env: 
+  DOCKER_USER: ${{ secrets.DOCKER_USER }}
+  DOCKER_PASS: ${{ secrets.DOCKER_PASS }}
+jobs: 
   build-push-webapp-image:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/docker
       - run: docker build -f Dockerfile.webapp . -t webapp:1.0
-      - run: docker login
-      - run: docker push
+      - run: docker login -u "$DOCKER_USER" -p "$DOCKER_PASS"
+      - run: docker tag webapp:1.0 dariuszdulko/webapp:1.0
+      - run: docker push dariuszdulko/webapp:1.0
   build-push-haproxy-image:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/docker
       - run: docker build -f Dockerfile.haproxy . -t haproxy:1.0
-      - run: docker login
-      - run: docker push 
+      - run: docker login -u "$DOCKER_USER" -p "$DOCKER_PASS"
+      - run: docker tag haproxy:1.0 dariuszdulko/haproxy:1.0
+      - run: docker push dariuszdulko/haproxy:1.0
