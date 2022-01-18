@@ -3,20 +3,22 @@ on: [push]
 env: 
   DOCKER_USER: ${{ secrets.DOCKER_USER }}
   DOCKER_PASS: ${{ secrets.DOCKER_PASS }}
+  WEBAPP_TAG: 1.1
+  HAPROXY_TAG: 1.1
 jobs: 
   build-push-webapp-image:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: docker build -f Dockerfile.webapp . -t webapp:1.0
+      - run: docker build -f Dockerfile.webapp . -t webapp:"$WEBAPP_TAG"
       - run: docker login -u "$DOCKER_USER" -p "$DOCKER_PASS"
-      - run: docker tag webapp:1.0 dariuszdulko/webapp:1.0
-      - run: docker push dariuszdulko/webapp:1.0
+      - run: docker tag webapp:"$WEBAPP_TAG" dariuszdulko/webapp:"$WEBAPP_TAG"
+      - run: docker push dariuszdulko/webapp:"$WEBAPP_TAG"
   build-push-haproxy-image:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: docker build -f Dockerfile.haproxy . -t haproxy:1.0
+      - run: docker build -f Dockerfile.haproxy . -t haproxy:"$HAPROXY_TAG"
       - run: docker login -u "$DOCKER_USER" -p "$DOCKER_PASS"
-      - run: docker tag haproxy:1.0 dariuszdulko/haproxy:1.0
-      - run: docker push dariuszdulko/haproxy:1.0
+      - run: docker tag haproxy:"$HAPROXY_TAG" dariuszdulko/haproxy:"$HAPROXY_TAG"
+      - run: docker push dariuszdulko/haproxy:"$HAPROXY_TAG"
