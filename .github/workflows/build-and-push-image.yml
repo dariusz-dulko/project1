@@ -3,8 +3,8 @@ on: [push]
 env: 
   DOCKER_USER: ${{ secrets.DOCKER_USER }}
   DOCKER_PASS: ${{ secrets.DOCKER_PASS }}
-  WEBAPP_TAG: 1.1
-  HAPROXY_TAG: 1.1
+  WEBAPP_TAG: 1.0
+  HAPROXY_TAG: 1.0
 jobs: 
   build-push-webapp-image:
     runs-on: ubuntu-latest
