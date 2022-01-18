@@ -1,1 +1,1 @@
-# project1
+# Here is simple test project serving three backend webapps through haproxy
