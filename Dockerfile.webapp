@@ -2,11 +2,7 @@ FROM httpd:2.4-alpine
 
 LABEL app="test-webapp"
 
-#COPY ./webapp/ /usr/local/apache2/htdocs/
-#COPY ./docker/app.conf /usr/local/apache2/conf/
-
 RUN apk update && \
     apk add vim
- #   echo "Include conf/app.conf" >> /usr/local/apache2/conf/httpd.conf
 
-CMD ["/bin/sh", "-c", "echo '<html><head><title>Dariusz Dulko</title></head><body><h1>Welcome to this fabulous test page under hostname: <font color='green'>'$(hostname)'<br></font> You can even imagine looking at beautiful logo and login page!</h1></body></html' > /usr/local/apache2/htdocs/index.html; httpd -D FOREGROUND"]
+CMD ["/bin/sh", "-c", "echo '<html><head><title>Dariusz Dulko</title></head><body><h1>Welcome to this fabulous test page under hostname: <font color='green'>'$(hostname)'</font><br> You can even imagine looking at beautiful logo and login page!</h1></body></html' > /usr/local/apache2/htdocs/index.html; httpd -D FOREGROUND"]

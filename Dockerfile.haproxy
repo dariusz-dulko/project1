@@ -3,8 +3,3 @@ FROM haproxy:alpine
 LABEL app="test-haproxy"
 
 COPY ./haproxy/ /usr/local/etc/haproxy/
-#COPY ./docker/app.conf /usr/local/apache2/conf/
-
-# RUN apk update && \
-#     apk add vim
- #   echo "Include conf/app.conf" >> /usr/local/apache2/conf/httpd.conf

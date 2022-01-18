@@ -1,0 +1,33 @@
+version: "0.3"
+
+services:
+  webapp1:
+    image: test-webapp:0.9
+    networks:
+      - test-network
+    ports:
+      - "8081:80"
+  webapp2:
+    image: test-webapp:0.9
+    networks:
+      - test-network
+    ports:
+      - "8082:80"
+  webapp3:
+    image: test-webapp:0.9
+    networks:
+      - test-network 
+    ports:
+      - "8083:80"
+  haproxy:
+    image: test-haproxy:0.5
+    networks:
+      - test-network 
+    ports:
+      - "8084:8084"
+
+networks:
+  external: 
+  test-network:
+    name: test-network
+    driver: bridge

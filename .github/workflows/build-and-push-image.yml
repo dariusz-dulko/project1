@@ -1,8 +1,19 @@
 name: build-image
 on: [push]
 jobs:
-  build-webapp-image:
+  build-push-webapp-image:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - uses: actions/docker
       - run: docker build -f Dockerfile.webapp . -t webapp:1.0
+      - run: docker login
+      - run: docker push
+  build-push-haproxy-image:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/docker
+      - run: docker build -f Dockerfile.haproxy . -t haproxy:1.0
+      - run: docker login
+      - run: docker push 
